@@ -36,6 +36,11 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="4" minY="4" maxX="4" maxY="4"/>
                         </collectionViewFlowLayout>
+                        <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="pjZ-4b-JV0">
+                            <rect key="frame" x="142" y="233" width="37" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                        </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="flickrCell" id="hmA-nE-5co" customClass="FlickrCollectionViewCell">
                                 <rect key="frame" x="4" y="4" width="154" height="154"/>
@@ -54,19 +59,17 @@
                                                             <rect key="frame" x="60" y="8" width="34" height="21"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T13-V8-cQu">
                                                             <rect key="frame" x="77" y="37" width="0.0" height="0.0"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <animations/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="T13-V8-cQu" firstAttribute="centerX" secondItem="HJi-QK-4MI" secondAttribute="centerX" id="J6G-HN-8kL"/>
                                                         <constraint firstItem="G7I-7e-sHh" firstAttribute="top" secondItem="HJi-QK-4MI" secondAttribute="top" constant="8" id="Pp2-Ik-ssx"/>
@@ -80,6 +83,10 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="154" height="154"/>
                                                     <animations/>
                                                 </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="S6E-5d-dUg">
+                                                    <rect key="frame" x="67" y="67" width="20" height="20"/>
+                                                    <animations/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <animations/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -90,8 +97,10 @@
                                                 <constraint firstAttribute="bottom" secondItem="HJi-QK-4MI" secondAttribute="bottom" id="KsI-eS-jUT"/>
                                                 <constraint firstItem="HJi-QK-4MI" firstAttribute="leading" secondItem="rDZ-oI-cmR" secondAttribute="leading" id="UVB-37-CuG"/>
                                                 <constraint firstItem="uMu-67-ylp" firstAttribute="leading" secondItem="rDZ-oI-cmR" secondAttribute="leading" id="Zla-Lu-SUt"/>
+                                                <constraint firstItem="S6E-5d-dUg" firstAttribute="centerX" secondItem="rDZ-oI-cmR" secondAttribute="centerX" id="efo-PT-jLK"/>
                                                 <constraint firstAttribute="trailing" secondItem="HJi-QK-4MI" secondAttribute="trailing" id="gEU-ek-A6E"/>
                                                 <constraint firstItem="uMu-67-ylp" firstAttribute="top" secondItem="rDZ-oI-cmR" secondAttribute="top" id="ol8-g0-XgI"/>
+                                                <constraint firstItem="S6E-5d-dUg" firstAttribute="centerY" secondItem="rDZ-oI-cmR" secondAttribute="centerY" id="yol-Q0-Yn5"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -106,6 +115,7 @@
                                     <constraint firstItem="rDZ-oI-cmR" firstAttribute="top" secondItem="hmA-nE-5co" secondAttribute="top" id="rcZ-b3-7eK"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="activityIndicator" destination="S6E-5d-dUg" id="uIj-Ls-1OZ"/>
                                     <outlet property="cellContentView" destination="rDZ-oI-cmR" id="fQJ-VT-jR8"/>
                                     <outlet property="cellImageView" destination="uMu-67-ylp" id="I2z-PG-LPT"/>
                                     <outlet property="imageDetailsView" destination="HJi-QK-4MI" id="wiR-Ig-rt8"/>
@@ -120,6 +130,9 @@
                     </collectionView>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Flickr App" id="8vn-oo-BPn"/>
+                    <connections>
+                        <outlet property="mainActivityIndicator" destination="pjZ-4b-JV0" id="Z4W-p7-aSh"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qf3-id-bfR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
