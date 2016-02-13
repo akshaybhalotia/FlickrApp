@@ -12,6 +12,14 @@
 
 static NSString *const LIST_URL = @"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ad766d15f6bb142ca9ed2a4722d083c7&tags=superman&per_page=36&format=json&nojsoncallback=1";
 
+static NSString *const kPhotos = @"photos";
+static NSString *const kPhoto = @"photo";
+static NSString *const kFarm = @"farm";
+static NSString *const kId = @"id";
+static NSString *const kSecret = @"secret";
+static NSString *const kServer = @"server";
+static NSString *const kTitle = @"title";
+
 @interface ImageStreamController () {
     DownloadQueue *downloadQueue;
     NSMutableArray *flickrPhotos;
@@ -39,15 +47,15 @@ static NSString *const LIST_URL = @"https://api.flickr.com/services/rest/?method
             NSError *jsonError;
             NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
             if (!jsonError) {
-                NSDictionary *photos = [dataDictionary objectForKey:@"photos"];
-                NSArray *photo = [photos objectForKey:@"photo"];
+                NSDictionary *photos = [dataDictionary objectForKey:kPhotos];
+                NSArray *photo = [photos objectForKey:kPhoto];
                 for (NSDictionary *flickrPhoto in photo) {
                     FlickrPhoto *newPhoto = [FlickrPhoto new];
-                    newPhoto.farmId = [flickrPhoto valueForKey:@"farm"];
-                    newPhoto.photoId = [flickrPhoto valueForKey:@"id"];
-                    newPhoto.photoSecret = [flickrPhoto valueForKey:@"secret"];
-                    newPhoto.serverId = [flickrPhoto valueForKey:@"server"];
-                    newPhoto.photoTitle = [flickrPhoto valueForKey:@"title"];
+                    newPhoto.farmId = [flickrPhoto valueForKey:kFarm];
+                    newPhoto.photoId = [flickrPhoto valueForKey:kId];
+                    newPhoto.photoSecret = [flickrPhoto valueForKey:kSecret];
+                    newPhoto.serverId = [flickrPhoto valueForKey:kServer];
+                    newPhoto.photoTitle = [flickrPhoto valueForKey:kTitle];
                     [flickrPhotos addObject:newPhoto];
                 }
                 [self.streamDelegate doneFetchingList:flickrPhotos withSuccess:YES];

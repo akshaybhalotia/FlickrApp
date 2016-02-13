@@ -8,11 +8,13 @@
 
 #import "DownloadQueue.h"
 
+static NSString *const QUEUE_NAME = @"Download Queue";
+
 @implementation DownloadQueue
 
 -(instancetype)init {
     if (self = [super init]) {
-        self.name = @"Download Queue";
+        self.name = QUEUE_NAME;
         self.maxConcurrentOperationCount = 4;
     }
     return self;

@@ -15,6 +15,7 @@ static NSString *const CELL_IDENTIFIER = @"flickrCell";
 
 static NSString *const ERROR = @"An error occured";
 static NSString *const MESSAGE = @"We couldn't establish a connection. Please try again later.";
+static NSString *const TITLE_OK = @"OK";
 
 @interface ViewController () <ImageStreamProtocol, UICollectionViewDelegateFlowLayout> {
     ImageStreamController *imageStreamController;
@@ -54,7 +55,7 @@ static NSString *const MESSAGE = @"We couldn't establish a connection. Please tr
         [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     } else {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:ERROR message:MESSAGE preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:TITLE_OK style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             [alert dismissViewControllerAnimated:YES completion:nil];
         }];
         [alert addAction:okAction];
