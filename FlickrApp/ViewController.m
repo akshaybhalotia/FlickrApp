@@ -7,20 +7,13 @@
 //
 
 #import "ViewController.h"
+#import "FlickrCollectionViewCell.h"
 
 static NSString *const CELL_IDENTIFIER = @"flickrCell";
 
-@interface FlickrCell : UICollectionViewCell
-
-@property (weak, nonatomic) IBOutlet UIView *cellContentView;
-
-@end
-
-@implementation FlickrCell
-
-@end
-
-@interface ViewController () <UICollectionViewDelegateFlowLayout>
+@interface ViewController () <UICollectionViewDelegateFlowLayout> {
+    NSMutableArray *selectedCells;
+}
 
 @end
 
@@ -29,6 +22,8 @@ static NSString *const CELL_IDENTIFIER = @"flickrCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    selectedCells = [NSMutableArray array];
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -36,8 +31,33 @@ static NSString *const CELL_IDENTIFIER = @"flickrCell";
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    FlickrCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CELL_IDENTIFIER forIndexPath:indexPath];
+    FlickrCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CELL_IDENTIFIER forIndexPath:indexPath];
+    if ([selectedCells indexOfObject:indexPath] == NSNotFound) {
+        cell.cellImageView.hidden = NO;
+        cell.imageDetailsView.hidden = YES;
+    } else {
+        cell.cellImageView.hidden = YES;
+        cell.imageDetailsView.hidden = NO;
+    }
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    FlickrCollectionViewCell *cell = (FlickrCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    if ([selectedCells indexOfObject:indexPath] == NSNotFound) {
+        [selectedCells addObject:indexPath];
+        [UIView transitionWithView:cell.cellContentView duration:0.5 options:UIViewAnimationOptionTransitionFlipFromRight animations:^() {
+            cell.cellImageView.hidden = YES;
+            cell.imageDetailsView.hidden = NO;
+        } completion:nil];
+    } else {
+        [selectedCells removeObject:indexPath];
+        [UIView transitionWithView:cell.cellContentView duration:0.5 options:UIViewAnimationOptionTransitionFlipFromLeft animations:^() {
+            cell.cellImageView.hidden = NO;
+            cell.imageDetailsView.hidden = YES;
+        } completion:nil];
+    }
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
