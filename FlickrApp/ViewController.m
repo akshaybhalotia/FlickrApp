@@ -8,7 +8,19 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+static NSString *const CELL_IDENTIFIER = @"flickrCell";
+
+@interface FlickrCell : UICollectionViewCell
+
+@property (weak, nonatomic) IBOutlet UIView *cellContentView;
+
+@end
+
+@implementation FlickrCell
+
+@end
+
+@interface ViewController () <UICollectionViewDelegateFlowLayout>
 
 @end
 
@@ -17,6 +29,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 20;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    FlickrCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CELL_IDENTIFIER forIndexPath:indexPath];
+    return cell;
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat side = self.view.frame.size.width / 2 - 6;
+    return CGSizeMake(side, side);
 }
 
 - (void)didReceiveMemoryWarning {
