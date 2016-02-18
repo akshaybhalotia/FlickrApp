@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  FlickrPhotosViewController.m
 //  FlickrApp
 //
 //  Created by Akshay Bhalotia on 13/02/16.
@@ -9,7 +9,7 @@
 #import "FlickrCollectionViewCell.h"
 #import "FlickrPhoto.h"
 #import "ImageStreamController.h"
-#import "ViewController.h"
+#import "FlickrPhotosViewController.h"
 
 static NSString *const CELL_IDENTIFIER = @"flickrCell";
 
@@ -17,7 +17,7 @@ static NSString *const ERROR = @"An error occured";
 static NSString *const MESSAGE = @"We couldn't establish a connection. Please try again later.";
 static NSString *const TITLE_OK = @"OK";
 
-@interface ViewController () <ImageStreamProtocol, UICollectionViewDelegateFlowLayout> {
+@interface FlickrPhotosViewController () <ImageStreamProtocol, UICollectionViewDelegateFlowLayout> {
     ImageStreamController *imageStreamController;
     NSMutableArray *flickrPhotos;
     NSMutableArray *selectedCells;
@@ -26,7 +26,7 @@ static NSString *const TITLE_OK = @"OK";
 
 @end
 
-@implementation ViewController
+@implementation FlickrPhotosViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

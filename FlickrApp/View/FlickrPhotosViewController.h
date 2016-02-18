@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  FlickrPhotosViewController.h
 //  FlickrApp
 //
 //  Created by Akshay Bhalotia on 13/02/16.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UICollectionViewController
+@interface FlickrPhotosViewController : UICollectionViewController
 
 @end
 
